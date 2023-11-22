@@ -21,12 +21,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Set;
 
 @Slf4j
-public class PermissionInterceptor implements HandlerInterceptor {
+public class PermissionCheckInterceptor implements HandlerInterceptor {
 
     private SysUserService sysUserService;
     private RedisTemplate<String, Object> redisTemplate;
 
-    public PermissionInterceptor(SysUserService sysUserService, RedisTemplate<String, Object> redisTemplate) {
+    public PermissionCheckInterceptor(SysUserService sysUserService, RedisTemplate<String, Object> redisTemplate) {
         this.sysUserService = sysUserService;
         this.redisTemplate = redisTemplate;
     }

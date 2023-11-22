@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class LoginService {
@@ -22,6 +23,8 @@ public class LoginService {
     private SysUserService sysUserService;
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
+
+    private static final Integer MAX_EXPIRE_SECONDS = 3600;
 
     public R login(LoginVO loginVO) {
         SysUser sysUser = sysUserService.queryByUsername(loginVO.getUsername());
@@ -37,7 +40,7 @@ public class LoginService {
                 .email(sysUser.getEmail())
                 .build();
         String token = UUID.randomUUID().toString().replaceAll("-", "");
-        redisTemplate.opsForValue().set(RedisKeyPrefix.TOKEN_PREFIX + token, userBO);
+        redisTemplate.opsForValue().set(RedisKeyPrefix.TOKEN_PREFIX + token, userBO, MAX_EXPIRE_SECONDS, TimeUnit.SECONDS);
         return R.ok(token);
     }
 

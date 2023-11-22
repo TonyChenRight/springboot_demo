@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tony.springboot.demo.mapper.SysLogMapper">
+
+    <resultMap id="BaseResultMap" type="com.tony.springboot.demo.entity.SysLog">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="accessUser" column="access_user" jdbcType="BIGINT"/>
+            <result property="method" column="method" jdbcType="VARCHAR"/>
+            <result property="params" column="params" jdbcType="OTHER"/>
+            <result property="executeTime" column="execute_time" jdbcType="BIGINT"/>
+            <result property="ip" column="ip" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,access_user,method,
+        params,execute_time,ip,
+        create_time
+    </sql>
+</mapper>

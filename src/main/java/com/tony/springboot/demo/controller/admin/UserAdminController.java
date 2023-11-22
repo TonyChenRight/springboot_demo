@@ -1,4 +1,4 @@
-package com.tony.springboot.demo.controller.admin.system;
+package com.tony.springboot.demo.controller.admin;
 
 import com.tony.springboot.demo.model.R;
 import com.tony.springboot.demo.model.vo.user.SysUserStatusVO;
@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 @Api(tags = "用户管理")
 @RestController
 @RequestMapping("/admin/user")
-public class UserController {
+public class UserAdminController {
     @Resource
     private SysUserService sysUserService;
 

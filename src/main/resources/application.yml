@@ -30,3 +30,6 @@ mybatis-plus:
       id-type: AUTO
       # 默认数据库表下划线命名
       table-underline: true
+
+# 签名
+api.signature: '{"417c4f3f30d34043": "5d940d7bb69d428eaf813a243591aba3"}'

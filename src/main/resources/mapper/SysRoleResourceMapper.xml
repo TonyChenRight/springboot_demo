@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tony.springboot.demo.mapper.SysRoleResourceMapper">
+
+    <resultMap id="BaseResultMap" type="com.tony.springboot.demo.entity.SysRoleResource">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="roleId" column="role_id" jdbcType="BIGINT"/>
+            <result property="resourceId" column="resource_id" jdbcType="BIGINT"/>
+            <result property="createUser" column="create_user" jdbcType="BIGINT"/>
+            <result property="createTime" column="create_time" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,role_id,resource_id,
+        create_user,create_time
+    </sql>
+
+    <select id="queryUserApis" resultType="java.lang.String">
+        select sre.url from `sys_role_resource` srr
+        left join sys_role sr on srr.`role_id` = sr.id
+        left join sys_resource sre on srr.resource_id = sre.id
+        where sr.`status` =1 and sre.status = 1
+        and srr.role_id IN
+        <foreach collection="roleIds" item="item" open="(" close=")">
+            #{item}
+        </foreach>
+    </select>
+
+</mapper>

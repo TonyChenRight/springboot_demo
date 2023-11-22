@@ -1,5 +1,18 @@
 use springboot_demo;
 
+DROP TABLE IF EXISTS `sys_log`;
+CREATE TABLE `sys_log` (
+   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+   `access_user` bigint(20) NOT NULL DEFAULT '0' COMMENT '访问用户',
+   `method` varchar(256) NOT NULL DEFAULT '' COMMENT '请求方法',
+   `params` json DEFAULT NULL COMMENT '请求参数',
+   `execute_time` bigint(20) NOT NULL DEFAULT '0' COMMENT '执行时长(毫秒)',
+   `ip` varchar(64) NOT NULL DEFAULT '' COMMENT 'IP地址',
+   `create_time` bigint(20) NOT NULL DEFAULT '0' COMMENT '创建时间',
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='系统日志';
+
+
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user` (
     `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
