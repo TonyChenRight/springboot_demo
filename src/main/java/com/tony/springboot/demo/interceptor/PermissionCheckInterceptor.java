@@ -5,7 +5,7 @@ import cn.hutool.core.text.AntPathMatcher;
 import cn.hutool.core.util.StrUtil;
 import com.tony.springboot.demo.constant.Codes;
 import com.tony.springboot.demo.constant.Constants;
-import com.tony.springboot.demo.constant.RedisKeyPrefix;
+import com.tony.springboot.demo.constant.RedisKeys;
 import com.tony.springboot.demo.context.UserConext;
 import com.tony.springboot.demo.model.R;
 import com.tony.springboot.demo.model.bo.UserBO;
@@ -38,7 +38,7 @@ public class PermissionCheckInterceptor implements HandlerInterceptor {
             ResponseUtil.writeJson(R.error(Codes.UNAUTHORIZED, "缺少`token`参数"), response);
             return false;
         }
-        UserBO userBO = (UserBO) redisTemplate.opsForValue().get(RedisKeyPrefix.TOKEN_PREFIX + token);
+        UserBO userBO = (UserBO) redisTemplate.opsForValue().get(RedisKeys.TOKEN_PREFIX + token);
         if (userBO == null) {
             ResponseUtil.writeJson(R.error(Codes.UNAUTHORIZED, "无效token或已失效"), response);
             return false;

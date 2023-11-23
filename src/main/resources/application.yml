@@ -12,7 +12,7 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
   servlet:
     multipart:
-      maxFileSize: 104857600 #100MB
+      maxFileSize: 20971520 #20MB
       maxRequestSize: 104857600 #100MB
   mvc:
     pathmatch:

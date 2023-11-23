@@ -5,7 +5,7 @@ import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
-import com.tony.springboot.demo.config.SystemConfig;
+import com.tony.springboot.demo.config.BizConfig;
 import com.tony.springboot.demo.constant.Codes;
 import com.tony.springboot.demo.constant.Headers;
 import com.tony.springboot.demo.constant.SignatureParams;
@@ -17,7 +17,6 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -27,10 +26,10 @@ import java.util.Objects;
 @Slf4j
 public class ApiSignatureCheckInterceptor implements HandlerInterceptor {
 
-    private SystemConfig systemConfig;
+    private BizConfig bizConfig;
 
-    public ApiSignatureCheckInterceptor(SystemConfig systemConfig) {
-        this.systemConfig = systemConfig;
+    public ApiSignatureCheckInterceptor(BizConfig bizConfig) {
+        this.bizConfig = bizConfig;
     }
 
     @Override
@@ -45,7 +44,7 @@ public class ApiSignatureCheckInterceptor implements HandlerInterceptor {
             ResponseUtil.writeJson(R.error(Codes.UNAUTHORIZED, "缺少参数`keyId`"), response);
             return false;
         }
-        String secret = systemConfig.getApiSignatureMap().get(keyId);
+        String secret = bizConfig.getApiSignatureMap().get(keyId);
         if (StrUtil.isBlank(secret)) {
             ResponseUtil.writeJson(R.error(Codes.UNAUTHORIZED, "无效参数`keyId`"), response);
             return false;

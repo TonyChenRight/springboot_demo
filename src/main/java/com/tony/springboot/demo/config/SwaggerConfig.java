@@ -57,18 +57,5 @@ public class SwaggerConfig {
                 .build());
         return parameters;
     }
-
-    private List<SecurityScheme> securitySchemes() {
-        ApiKey apiKey = new ApiKey("demo token", Constants.TOKEN, In.HEADER.toValue());
-        return Collections.singletonList(apiKey);
-    }
-    private List<SecurityContext> securityContexts() {
-        return Collections.singletonList(
-                SecurityContext.builder()
-                        .securityReferences(Collections.singletonList(new SecurityReference(Constants.TOKEN,
-                                new AuthorizationScope[]{new AuthorizationScope("global", "")})))
-                        .build()
-        );
-    }
 }
 

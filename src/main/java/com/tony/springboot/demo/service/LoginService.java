@@ -3,7 +3,7 @@ package com.tony.springboot.demo.service;
 import cn.hutool.core.lang.UUID;
 import cn.hutool.core.util.StrUtil;
 import com.tony.springboot.demo.constant.Constants;
-import com.tony.springboot.demo.constant.RedisKeyPrefix;
+import com.tony.springboot.demo.constant.RedisKeys;
 import com.tony.springboot.demo.entity.SysUser;
 import com.tony.springboot.demo.enums.StatusEnum;
 import com.tony.springboot.demo.model.R;
@@ -40,7 +40,7 @@ public class LoginService {
                 .email(sysUser.getEmail())
                 .build();
         String token = UUID.randomUUID().toString().replaceAll("-", "");
-        redisTemplate.opsForValue().set(RedisKeyPrefix.TOKEN_PREFIX + token, userBO, MAX_EXPIRE_SECONDS, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(RedisKeys.TOKEN_PREFIX + token, userBO, MAX_EXPIRE_SECONDS, TimeUnit.SECONDS);
         return R.ok(token);
     }
 
@@ -49,6 +49,6 @@ public class LoginService {
         if (StrUtil.isBlank(token)) {
             return null;
         }
-        return (UserBO) redisTemplate.opsForValue().get(RedisKeyPrefix.TOKEN_PREFIX + token);
+        return (UserBO) redisTemplate.opsForValue().get(RedisKeys.TOKEN_PREFIX + token);
     }
 }

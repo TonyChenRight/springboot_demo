@@ -8,7 +8,7 @@ import java.util.Map;
 
 @Getter
 @Configuration
-public class SystemConfig {
+public class BizConfig {
     @Value("#{${api.signature}}")
     private Map<String, String> apiSignatureMap;
 }

@@ -27,7 +27,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     private RedisTemplate<String, Object> redisTemplate;
     @Resource
     @Lazy
-    private SystemConfig systemConfig;
+    private BizConfig systemConfig;
 
     @Override
     public void addInterceptors(InterceptorRegistry interceptorRegistry) {
